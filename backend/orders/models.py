@@ -50,14 +50,17 @@ def on_change(sender, instance: Order, **kwargs):
     (change for status change date if date
     was not specified in save())
     '''
-    prev_order = Order.objects.get(id=instance.id)
-    if prev_order.status != instance.status:
-        if instance.status == 'SENT' and prev_order.send_date == instance.send_date:
-            instance.send_date = datetime.datetime.now()
-        elif instance.status == 'CANCELLED' and prev_order.cancellation_date == instance.cancellation_date:
-            instance.cancellation_date = datetime.datetime.now()
-        elif instance.status == 'COMPLETED' and prev_order.completed_date == instance.completed_date:
-            instance.completed_date = datetime.datetime.now()
+    try:
+        prev_order = Order.objects.get(id=instance.id)
+        if prev_order.status != instance.status:
+            if instance.status == 'SENT' and prev_order.send_date == instance.send_date:
+                instance.send_date = datetime.datetime.now()
+            elif instance.status == 'CANCELLED' and prev_order.cancellation_date == instance.cancellation_date:
+                instance.cancellation_date = datetime.datetime.now()
+            elif instance.status == 'COMPLETED' and prev_order.completed_date == instance.completed_date:
+                instance.completed_date = datetime.datetime.now()
+    except:
+        pass
 
     
 class OrderItem(models.Model):

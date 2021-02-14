@@ -21,7 +21,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
-with open('E:/deimos_shop_config.json') as config_file:
+with open('D:/deimos_shop_config.json') as config_file:
     config = json.load(config_file)
 
 # SECURITY WARNING: keep the secret key used in production secret!
@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'core.apps.CoreConfig',
     'orders.apps.OrdersConfig',
+    'accounts.apps.AccountsConfig',
 ]
 
 REST_FRAMEWORK = {
